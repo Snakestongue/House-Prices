@@ -30,6 +30,10 @@ Retrains the final model using training + validation data
 
 Saves the trained model using Joblib
 
+[View Full Machine Learning Documentation](https://github.com/Snakestongue/House-Prices/blob/Kaggle-Data/README.md)
+
+This link contains a detailed version of ML workflow and is located in the other branch.
+
 ### Web Application
 
 - Flask-powered backend
@@ -67,7 +71,7 @@ AI-Housing-Predictor/
 └── README.md
 ```
 
-# 🧩 Technologies Used
+# Technologies Used
 
 ## Backend
 
