@@ -9,8 +9,10 @@
                 "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
             }
         }</script>
-        <link rel="stylesheet" href="{{ url_for('static', filename='input.css') }}">
-<script type="module" src="{{ url_for('static', filename='threeD.js') }}"></script>
+        <link rel="stylesheet" href="{{url_for('static', filename ='input.css')}}">
+        <script type="module" src="{{url_for('static' , filename= 'threeD.js' )}}"></script>
+        <link rel="icon" type="image/x-icon" href="/FRONTEND/favicon.png">
+
     </head>
     <body class="min-h-screen flex items-start md:items-center justify-center pt-6">
         <canvas id="bg"></canvas> <!--Used for the 3d background :)-->
@@ -19,71 +21,98 @@
             <h1 class=" text-[36px] font-extrabold text-center mb-4 
             bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-transparent
             ">AI Housing Predictor</h1>
+            <p class="text-center mt-4 mb-6">Used Kaggle's Boston Housing Prices Dataset</p>
             <form action="/predict" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div>
-                <label>Crime Rate</label>
-                <input class="input" type="number"  name="CRIM"placeholder="Enter value">
+                    <label class="text-white">Crime Rate (0-2)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type="number" step="any" name="CRIM"placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>Residential Land</label>
-                <input class="input"type="number" name="ZN" placeholder="Enter value">
+                    <label class="text-white">Residential Land Zoned (0-100)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none"type="number"step="any" name="ZN" placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>Industrial</label>
-                <input class="input" type="number" name="INDUS"placeholder="Enter value">
+                    <label class="text-white">Industrial (0-30)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type="number"step="any" name="INDUS"placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>Nitric Oxide</label>
-                <input class="input" type="number" name="NOX"placeholder="Enter value">
+                    <label class="text-white">Nitric Oxide (0-1)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type="number"step="any" name="NOX"placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>Rooms</label>
-                <input class="input" type="number"   name="RM" placeholder="Enter value">
+                    <label class="text-white">Rooms (0-10)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type="number" step="any"  name="RM" placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>Age</label>
-                <input class="input" type="number"name="AGE" placeholder="Enter value">
+                    <label class="text-white">Age (0-100)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type="number" step="any" name="AGE" placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>Distance </label>
-                <input class=" input" type="number" name="DIS" placeholder="Enter value">
+                    <label class="text-white">Distance (0-15)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type="number" step="any" name="DIS" placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>RAD</label>
-                <input class="input " type="number" name="RAD" placeholder="Enter value">
+                    <label class="text-white">RAD (0-24)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none " type="number" step="any" name="RAD" placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>Tax</label>
-                <input class="input" type=" number" name="TAX" placeholder="Enter value">
+                    <label class="text-white">Tax (150-800)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type=" number" step="any" name="TAX" placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>PTRATIO</label>
-                <input class="input" type="number" name="PTRATIO" placeholder="Enter value">
+                    <label class="text-white">PTRATIO (15-25)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type="number" step="any" name="PTRATIO" placeholder="Enter value">
                 </div>
 
                 <div>
-                <label>B</label>
-                <input class="input" type="number" name="B" placeholder=" Enter value">
+                    <label class="text-white">B (0-400)</label>
+                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type="number"step="any" name="B" placeholder=" Enter value">
                 </div>
 
                 <div>
-                <label>LSTAT</label>
-                <input class="input"   type="number" name="LSTAT" placeholder="Enter value">
+                    <label class="text-white">LSTAT (1-40)</label>
+                    <input class="w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" type="number" step="any" name="LSTAT" placeholder="Enter value">
                 </div>
                 <div>
-                    <label>Charles River</label>
-                    <select class="input" name="CHAS">
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
+                    <label class="text-white">Charles River</label>
+                    <select class="input w-full mt-[5px] p-[10px] bg-white/10 
+                    border border-white/20 
+                    text-white rounded-[10px] outline-none" name="CHAS">
+                        <option class="bg-gray-800"value="0">No</option>
+                        <option  class="bg-gray-800"value="1">Yes</option>
                     </select>
                 </div>
                 <button class="md:col-span-2 mt-8 py-4 rounded-[10px] font-bold 

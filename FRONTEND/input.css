@@ -16,19 +16,6 @@ body{
     background: transparent !important;
     backdrop-filter:blur(5px);
 }
-.input{
-    width:100%;
-    margin-top:5px;
-    padding:10px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.2);
-    color:white;
-    border-radius:10px;
-    outline:none;
-}
 .input:focus{
     box-shadow:0 0 10px #2563eb;
-}
-label{
-    color:#e2e8f0;
 }

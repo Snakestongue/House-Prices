@@ -31,6 +31,7 @@ def predict():
     }
     df = pd.DataFrame([values]) #makes the ditionary into a panda dataframe
     prediction = model.predict(df)[0]#sends data to my model
-    return f"<h1> House Price: ${prediction:.2f}</h1>" #display to 2 decimal 
+    price = prediction * 1000
+    return f"<h1>House Price (1970): ${price:.2f}</h1> <br> <p>Only 83% accurate. May have inaccuracies</p>"
 if __name__ == "__main__":
     app.run(debug=True) #server starts
