@@ -1,119 +1,126 @@
-# Boston Housing Price Prediction
+# AI Housing Predictor
 
-## Summary
+A **Machine Learning + Flask Web Application** that predicts Boston housing prices using multiple regression models. The project combines a trained Scikit-Learn model, a Flask backend API, and an interactive frontend with a Three.js animated 3D background.
 
-This project uses multiple machine learning regression models & scalers to predict housing prices using the Boston Housing dataset found on Kaggle. 
+The application allows users to enter housing information and receive an AI-generated price prediction instantly.
 
-The target variable is **MEDV**, which represents the median value a house in thousands of dollars.
+## Features
 
-## Dataset
+### Machine Learning
 
-The dataset includes these features: These description were found on GeeksforGeeks
+Trains and compares multiple regression algorithms:
 
-- **CRIM** - Per capita crime rate
-- **ZN** - Proportion of residential land zoned for large lots
-- **INDUS** - Proportion of non-retail business acres
-- **CHAS** - Charles River variable (1/0)
-- **NOX** - Nitric oxide concentration
-- **RM** - Average number of rooms (prior to 1940)
-- **AGE** - Proportion of older homes
-- **DIS** - Distance to employment centers
-- **RAD** - Accessibility to highways
-- **TAX** - Property tax rate
-- **PTRATIO** - Pupil-teacher ratio
-- **B** - Proportion of population by demographics
-- **LSTAT** - Percentage of lower-status population
+  - Linear Regression
+  - Ridge Regression
+  - Lasso Regression
+  - Random Forest Regressor
+  - Gradient Boosting Regressor
+    
+Tests multiple feature scaling techniques:
 
-The model predicts:
+  - Standard Scaling
+  - Min-Max Scaling
+  - Robust Scaling
+  - Quantile Transformation
+  - Power Transformation
+    
+Automatically selects the best-performing validation model
 
-- **MEDV** - Median housing value
+Retrains the final model using training + validation data
 
-## Models Tested
+Saves the trained model using Joblib
 
-The project compares several models:
+[View Full Machine Learning Documentation](https://github.com/Snakestongue/House-Prices/blob/Kaggle-Data/README.md)
 
-### Linear Models
+This link contains a detailed version of ML workflow and is located in the other branch.
 
-* Linear Regression
-* Ridge Regression
-* Lasso Regression
+### Web Application
 
-### Tree Based Models
+- Flask-powered backend
+- HTML form input system
+- Loads saved model without retraining via Joblit
+- Clean separation between:
 
-* Random Forest Regressor
-* Gradient Boosting Regressor
+  - Frontend
+  - Backend
+  - Machine Learning pipeline
 
-## Preprocessing
+### Interactive Frontend
 
-Different scaling methods were tested with linear models only:
+- Responsive UI using Tailwind CSS
+- Animated 3D background using Three.js
+- Floating buildings and particle effects
+- Mouse-controlled camera movement
 
-* StandardScaler
-* MinMaxScaler
-* RobustScaler
-* QuantileTransformer
-* PowerTransformer
+# Project Structure
 
-Tree-based models were trained without scaling.
+```
+AI-Housing-Predictor/
+│
+├── BACKEND/
+│   ├── app.py                  # Flask application
+│   ├── boston.csv              # CSV used to train model
+│   ├── housing_model.pkl       # Saved trained ML model
+│   └── main.py                 # Model training script
+│
+├── FRONTEND/
+│   ├── index.html              # User interface
+│   ├── input.css               # Styling
+│   └── threeD.js               # Three.js animations
+│
+└── README.md
+```
 
-## Workflow
+# Technologies Used
 
-The project follows this workflow:
+## Backend
 
-1. Load and clean the dataset (cleaning was not required for this dataset)
-2. Separate into features (`X`) and target (`Y`)
-3. Split the data into (using train_test_split):
+- Python
+- Flask
+- Pandas
+- Joblib
 
-   * Training set - Used for training the models
-   * Validation set - Used to select best model
-   * Testing set - Used on final model for final result
+## Machine Learning
 
-4. Train linear models with different preprocessing methods
-5. Evaluate models using metrics such as:
+- Scikit-Learn
+- Matplotlib
+- Pandas
+- Linear Regression
+- Ridge Regression
+- Lasso Regression
+- Random Forest
+- Gradient Boosting
 
-   * R² Score
-   * Mean Absolute Error (MAE)
-   * Mean Squared Error (MSE)
-   * Root Mean Squared Error (RMSE)
-6. Select the best model based on R2
-7. Retrain the selected model using training & validation data
-8. Evaluate final performance on the new test data
-9. Visualize predicted values compared to actual values via matplotlib
+## Frontend
 
-## Evaluation Metrics
+* HTML
+* Tailwind CSS
+* JavaScript
+* Three.js
 
-### R² Score
+# Three.js Background
 
-Measures how well the model explains the variation in housing prices. Higher values indicate better performance.
+The frontend contains a  3D environment:
 
-### Mean Absolute Error (MAE)
+### Particle System
 
-Measures the average absolute difference between predictions and the actual values.
+- 6000 animated particles
+- Continuous rotation
 
-### Mean Squared Error (MSE)
+### Buildings
 
-Measures the average squared difference between predictions and the actual values.
+- Randomly generated 3D structures
+- Wireframe futuristic design
 
-### Root Mean Squared Error (RMSE)
+### Effects
 
-The square root of MSE, providing an error value.
+- Bloom lighting
+- Ambient lighting
+- Mouse-controlled camera movement
 
-## Results
+# Project Goal
 
-The models were compared using their R2, and the highest performing model was selected for final testing.
+To demonstrate a complete machine learning workflow:
 
-Final evaluation metrics based on the test data used for only the best performing model during training:
-
-* R² Score: *0.839683428489358*
-* MAE: *2.5851297612340414*
-* MSE: *14.279368991257387*
-* RMSE: *3.7788052333055466*
-
-A scatter plot was created to compare actual housing prices against model predictions. Predictions closer to the diagonal reference line show a better model performance.
-
-## Technologies Used
-
-* Python
-* Pandas
-* Matplotlib
-* Scikit-learn
+**Data → Training → Evaluation → Deployment → User Interaction**
 
