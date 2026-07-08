@@ -25,92 +25,66 @@
             <form action="/predict" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-2">
                 <div>
                     <label class="text-white">Crime Rate (0-2)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type="number" step="any" name="CRIM"placeholder="Enter value">
+                    <input class="input" type="number" step="any" name="CRIM"placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">Residential Land Zoned (0-100)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none"type="number"step="any" name="ZN" placeholder="Enter value">
+                    <input class="input" type="number"step="any" name="ZN" placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">Industrial (0-30)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type="number"step="any" name="INDUS"placeholder="Enter value">
+                    <input class="input" type="number"step="any" name="INDUS"placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">Nitric Oxide (0-1)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type="number"step="any" name="NOX"placeholder="Enter value">
+                    <input class="input" type="number"step="any" name="NOX"placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">Rooms (0-10)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type="number" step="any"  name="RM" placeholder="Enter value">
+                    <input class="input" type="number" step="any"  name="RM" placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">Age (0-100)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type="number" step="any" name="AGE" placeholder="Enter value">
+                    <input class="input" type="number" step="any" name="AGE" placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">Distance (0-15)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type="number" step="any" name="DIS" placeholder="Enter value">
+                    <input class="input" type="number" step="any" name="DIS" placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">RAD (0-24)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none " type="number" step="any" name="RAD" placeholder="Enter value">
+                    <input class="input" type="number" step="any" name="RAD" placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">Tax (150-800)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type=" number" step="any" name="TAX" placeholder="Enter value">
+                    <input class="input" type=" number" step="any" name="TAX" placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">PTRATIO (15-25)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type="number" step="any" name="PTRATIO" placeholder="Enter value">
+                    <input class="input" type="number" step="any" name="PTRATIO" placeholder="Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">B (0-400)</label>
-                    <input class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type="number"step="any" name="B" placeholder=" Enter value">
+                    <input class="input" type="number"step="any" name="B" placeholder=" Enter value" required>
                 </div>
 
                 <div>
                     <label class="text-white">LSTAT (1-40)</label>
-                    <input class="w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" type="number" step="any" name="LSTAT" placeholder="Enter value">
+                    <input class="input" type="number" step="any" name="LSTAT" placeholder="Enter value" required>
                 </div>
                 <div>
                     <label class="text-white">Charles River</label>
-                    <select class="input w-full mt-[5px] p-[10px] bg-white/10 
-                    border border-white/20 
-                    text-white rounded-[10px] outline-none" name="CHAS">
+                    <select class="input" name="CHAS" required>
                         <option class="bg-gray-800"value="0">No</option>
                         <option  class="bg-gray-800"value="1">Yes</option>
                     </select>
