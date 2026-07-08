@@ -1,119 +1,122 @@
-# Boston Housing Price Prediction
+# AI Housing Predictor
 
-## Summary
+A **Machine Learning + Flask Web Application** that predicts Boston housing prices using multiple regression models. The project combines a trained Scikit-Learn model, a Flask backend API, and an interactive frontend with a Three.js animated 3D background.
 
-This project uses multiple machine learning regression models & scalers to predict housing prices using the Boston Housing dataset found on Kaggle. 
+The application allows users to enter housing information and receive an AI-generated price prediction instantly.
 
-The target variable is **MEDV**, which represents the median value a house in thousands of dollars.
+## Features
 
-## Dataset
+### Machine Learning
 
-The dataset includes these features: These description were found on GeeksforGeeks
+Trains and compares multiple regression algorithms:
 
-- **CRIM** - Per capita crime rate
-- **ZN** - Proportion of residential land zoned for large lots
-- **INDUS** - Proportion of non-retail business acres
-- **CHAS** - Charles River variable (1/0)
-- **NOX** - Nitric oxide concentration
-- **RM** - Average number of rooms (prior to 1940)
-- **AGE** - Proportion of older homes
-- **DIS** - Distance to employment centers
-- **RAD** - Accessibility to highways
-- **TAX** - Property tax rate
-- **PTRATIO** - Pupil-teacher ratio
-- **B** - Proportion of population by demographics
-- **LSTAT** - Percentage of lower-status population
+  - Linear Regression
+  - Ridge Regression
+  - Lasso Regression
+  - Random Forest Regressor
+  - Gradient Boosting Regressor
+    
+Tests multiple feature scaling techniques:
 
-The model predicts:
+  - Standard Scaling
+  - Min-Max Scaling
+  - Robust Scaling
+  - Quantile Transformation
+  - Power Transformation
+    
+Automatically selects the best-performing validation model
 
-- **MEDV** - Median housing value
+Retrains the final model using training + validation data
 
-## Models Tested
+Saves the trained model using Joblib
 
-The project compares several models:
+### Web Application
 
-### Linear Models
+- Flask-powered backend
+- HTML form input system
+- Loads saved model without retraining via Joblit
+- Clean separation between:
 
-* Linear Regression
-* Ridge Regression
-* Lasso Regression
+  - Frontend
+  - Backend
+  - Machine Learning pipeline
 
-### Tree Based Models
+### Interactive Frontend
 
-* Random Forest Regressor
-* Gradient Boosting Regressor
+- Responsive UI using Tailwind CSS
+- Animated 3D background using Three.js
+- Floating buildings and particle effects
+- Mouse-controlled camera movement
 
-## Preprocessing
+# Project Structure
 
-Different scaling methods were tested with linear models only:
+```
+AI-Housing-Predictor/
+│
+├── BACKEND/
+│   ├── app.py                  # Flask application
+│   ├── boston.csv              # CSV used to train model
+│   ├── housing_model.pkl       # Saved trained ML model
+│   └── main.py                 # Model training script
+│
+├── FRONTEND/
+│   ├── index.html              # User interface
+│   ├── input.css               # Styling
+│   └── threeD.js               # Three.js animations
+│
+└── README.md
+```
 
-* StandardScaler
-* MinMaxScaler
-* RobustScaler
-* QuantileTransformer
-* PowerTransformer
+# 🧩 Technologies Used
 
-Tree-based models were trained without scaling.
+## Backend
 
-## Workflow
+- Python
+- Flask
+- Pandas
+- Joblib
 
-The project follows this workflow:
+## Machine Learning
 
-1. Load and clean the dataset (cleaning was not required for this dataset)
-2. Separate into features (`X`) and target (`Y`)
-3. Split the data into (using train_test_split):
+- Scikit-Learn
+- Matplotlib
+- Pandas
+- Linear Regression
+- Ridge Regression
+- Lasso Regression
+- Random Forest
+- Gradient Boosting
 
-   * Training set - Used for training the models
-   * Validation set - Used to select best model
-   * Testing set - Used on final model for final result
+## Frontend
 
-4. Train linear models with different preprocessing methods
-5. Evaluate models using metrics such as:
+* HTML
+* Tailwind CSS
+* JavaScript
+* Three.js
 
-   * R² Score
-   * Mean Absolute Error (MAE)
-   * Mean Squared Error (MSE)
-   * Root Mean Squared Error (RMSE)
-6. Select the best model based on R2
-7. Retrain the selected model using training & validation data
-8. Evaluate final performance on the new test data
-9. Visualize predicted values compared to actual values via matplotlib
+# Three.js Background
 
-## Evaluation Metrics
+The frontend contains a  3D environment:
 
-### R² Score
+### Particle System
 
-Measures how well the model explains the variation in housing prices. Higher values indicate better performance.
+- 6000 animated particles
+- Continuous rotation
 
-### Mean Absolute Error (MAE)
+### Buildings
 
-Measures the average absolute difference between predictions and the actual values.
+- Randomly generated 3D structures
+- Wireframe futuristic design
 
-### Mean Squared Error (MSE)
+### Effects
 
-Measures the average squared difference between predictions and the actual values.
+- Bloom lighting
+- Ambient lighting
+- Mouse-controlled camera movement
 
-### Root Mean Squared Error (RMSE)
+# Project Goal
 
-The square root of MSE, providing an error value.
+To demonstrate a complete machine learning workflow:
 
-## Results
-
-The models were compared using their R2, and the highest performing model was selected for final testing.
-
-Final evaluation metrics based on the test data used for only the best performing model during training:
-
-* R² Score: *0.839683428489358*
-* MAE: *2.5851297612340414*
-* MSE: *14.279368991257387*
-* RMSE: *3.7788052333055466*
-
-A scatter plot was created to compare actual housing prices against model predictions. Predictions closer to the diagonal reference line show a better model performance.
-
-## Technologies Used
-
-* Python
-* Pandas
-* Matplotlib
-* Scikit-learn
+**Data → Training → Evaluation → Deployment → User Interaction**
 
