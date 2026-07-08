@@ -1,3 +1,4 @@
+import joblib
 import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.linear_model import Lasso, Ridge, LinearRegression
@@ -134,3 +135,6 @@ plt.plot(
     color="red"
 )
 plt.show()
+
+joblib.dump(best_model, "housing_model.pkl")
+print("Model saved!")
