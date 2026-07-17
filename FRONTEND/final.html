@@ -1,0 +1,26 @@
+<html>
+    <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Housing Prediction</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <script type="importmap">{
+                "imports": {
+                    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+                }
+            }</script>
+            <link rel="stylesheet" href="{{url_for('static', filename ='input.css')}}">
+            <script type="module" src="{{url_for('static' , filename= 'threeDFinal.js' )}}"></script>
+            <link rel="icon" type="image/x-icon" href="/FRONTEND/favicon.png">
+
+    </head>
+    <body class="min-h-screen flex items-start md:items-center justify-center pt-6">
+        <canvas id="bg"></canvas>
+        <div id="finalDiv">
+            <h3 class="text-[#b2f7b2]">House Price Prediction</h1>
+            <h4 class="text-[#b2f7b2]">Estimated Price: ${{ price }}</h2>
+            <p class="!text-white mb-[10px]">Model accuracy is about 83%. Predictions may have inaccuracies.</p>
+            <a href="/" class="!text-white border border-[#b2f7b2] p-[5px] rounded-[10px] hover:opacity-50">Try another house</a>
+        </div>
+    </body>
+</html>
