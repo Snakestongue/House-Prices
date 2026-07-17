@@ -64,9 +64,11 @@ AI-Housing-Predictor/
 │   └── main.py                 # Model training script
 │
 ├── FRONTEND/
-│   ├── index.html              # User interface
+│   ├── final.html              # Results page                     
+│   ├── index.html              # Main page
 │   ├── input.css               # Styling
-│   └── threeD.js               # Three.js animations
+│   ├── threeD.js               # Three.js animations for home page
+│   └── threeDFinal.js          # Three.js animations for result page 
 │
 └── README.md
 ```
