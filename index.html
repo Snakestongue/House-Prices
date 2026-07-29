@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Housing Predictor</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script type="importmap">{
+            "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+            }
+        }</script>
+        <link rel="stylesheet" href="{{url_for('static', filename ='input.css')}}">
+        <script type="module" src="{{url_for('static' , filename= 'threeD.js' )}}"></script>
+        <link rel="icon" type="image/x-icon" href="/FRONTEND/favicon.png">
+
+        <style>
+            /* Tooltip styling */
+            .field-label {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                position: relative;
+            }
+            .info-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 16px;
+                height: 16px;
+                border-radius: 9999px;
+                background: rgba(255, 255, 255, 0.15);
+                color: #bfdbfe;
+                font-size: 11px;
+                font-weight: 700;
+                cursor: help;
+                flex-shrink: 0;
+            }
+            .tooltip-box {
+                position: absolute;
+                bottom: calc(100% + 8px);
+                left: 0;
+                width: 220px;
+                background: #0f172a;
+                color: #e2e8f0;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 1.4;
+                padding: 8px 10px;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(4px);
+                transition: opacity 0.15s ease, transform 0.15s ease;
+                z-index: 50;
+                pointer-events: none;
+            }
+            .field-label:hover .tooltip-box {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        </style>
+
+    </head>
+    <body class="min-h-screen flex items-start md:items-center justify-center pt-6">
+        <canvas id="bg"></canvas> <!--Used for the 3d background :)-->
+
+        <div class="w-full max-w-2xl rounded-[10px] py-4 px-6 text-white" id="formBackground">
+            <h1 class=" text-[36px] font-extrabold text-center mb-4 
+            bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-transparent
+            ">AI Housing Predictor</h1>
+            <p class="text-center mt-4 mb-6">Used Kaggle's Boston Housing Prices Dataset</p>
+            <form action="/predict" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <div>
+                    <label class="text-white field-label">Crime Rate (0-2)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">CRIM &mdash; Per capita crime rate by town. Higher values mean more crime in that area.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="CRIM" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">Residential Land Zoned (0-100)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">ZN &mdash; Proportion of residential land zoned for lots over 25,000 sq ft.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="ZN" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">Industrial (0-30)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">INDUS &mdash; Proportion of non-retail business acres per town.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="INDUS" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">Nitric Oxide (0-1)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">NOX &mdash; Nitric oxide concentration (parts per 10 million). A measure of air pollution.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="NOX" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">Rooms (0-10)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">RM &mdash; Average number of rooms per dwelling.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="RM" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">Age (0-100)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">AGE &mdash; Proportion of owner-occupied units built before 1940.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="AGE" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">Distance (0-15)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">DIS &mdash; Weighted distance to five Boston employment centers.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="DIS" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">RAD (0-24)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">RAD &mdash; Index of accessibility to radial highways. Higher means easier highway access.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="RAD" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">Tax (150-800)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">TAX &mdash; Full property tax rate per $10,000 of value.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="TAX" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">PTRATIO (15-25)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">PTRATIO &mdash; Pupil-teacher ratio by town. Lower usually means better-funded schools.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="PTRATIO" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">B (0-400)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">B &mdash; A statistic derived from the proportion of Black residents by town, calculated as 1000(Bk - 0.63)&sup2;. Included in the original dataset; note it's a controversial feature.</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="B" placeholder="Enter value" required>
+                </div>
+
+                <div>
+                    <label class="text-white field-label">LSTAT (1-40)
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">LSTAT &mdash; Percentage of the population considered "lower status" (e.g. lower income/education levels).</span>
+                    </label>
+                    <input class="input" type="number" step="any" name="LSTAT" placeholder="Enter value" required>
+                </div>
+                <div>
+                    <label class="text-white field-label">Charles River
+                        <span class="info-icon">i</span>
+                        <span class="tooltip-box">CHAS &mdash; Whether the property borders the Charles River (1 = Yes, 0 = No).</span>
+                    </label>
+                    <select class="input" name="CHAS" required>
+                        <option class="bg-gray-800" value="0">No</option>
+                        <option class="bg-gray-800" value="1">Yes</option>
+                    </select>
+                </div>
+                <button class="md:col-span-2 mt-8 py-4 rounded-[10px] font-bold 
+                hover:scale-105 transition
+                bg-gradient-to-r from-sky-400 to-blue-600
+                ">Predict Price</button>
+            </form>
+        </div>
+    </body>
+</html>
