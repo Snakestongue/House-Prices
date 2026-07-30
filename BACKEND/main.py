@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.linear_model import Lasso, Ridge, LinearRegression
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, PowerTransformer, QuantileTransformer, RobustScaler
@@ -93,45 +93,42 @@ for name, scaler in scales.items():
 
 trees = {
     "Forest": RandomForestRegressor(
-        n_estimators=100,
-        max_depth=3,
         random_state=11,
     ),
     "Gradient": GradientBoostingRegressor(
-        n_estimators=100,
-        max_depth=2,
         random_state=11,
-        learning_rate=.1
     )
 }
 for model_name, model in trees.items():
-    crossValTrees =cross_val_score(
-        model,xTrain, yTrain,cv=5, scoring="r2"
+    if model_name=="Forest":
+        parameters={
+            "n_estimators": [1,25,50,75,100,125, 150, 175, 200],#range(1, 101),
+            "max_depth": [1,3,5,7,9,11]
+        }
+    else:
+        parameters={
+            "n_estimators": [1,25,50,75,100,125, 150, 175, 200],#range(1, 101),
+            "max_depth":  [1,3,5,7,9,11],
+            "learning_rate":[.1,.2,.3,.4,.5]
+        }
+    crossValTrees =GridSearchCV(
+        model, 
+        param_grid=parameters, 
+        cv=5, scoring="r2",
+        n_jobs=-1,
+        verbose=2
+
     )
-    averageR2 = crossValTrees.mean()
+    crossValTrees.fit(xTrain, yTrain)
+    bestScore = crossValTrees.best_score_ #highest r2
     info.append({
         "Scaler": "None",
         "Model": model_name,
-        "R2": averageR2
+        "R2": bestScore
     })
-    if averageR2 > best_score:
-        best_score = averageR2
-        best_model = model
-
-    """REPLACED WITH CROSS VALIDATION (above)"""
-    # model.fit(xTrain, yTrain)
-    # predict = model.predict(xVal)
-    # info.append({
-    #     "Scaler": "None", 
-    #     "Model": model_name, 
-    #     "R2": r2_score(yVal, predict), 
-    #     "MAE": mean_absolute_error(yVal, predict), 
-    #     "MSE": mean_squared_error(yVal, predict),
-    #     "RMSE": mean_squared_error(yVal, predict) **.5
-    # })
-    # if (r2_score(yVal, predict)>best_score):
-    #         best_score = r2_score(yVal, predict)
-    #         best_model = model
+    if bestScore > best_score:
+        best_score = bestScore
+        best_model = crossValTrees.best_estimator_ #best model with optimized settings
 result = pd.DataFrame(info)
 result = result.sort_values(["R2"], ascending=False)
 print(result.head(10))
