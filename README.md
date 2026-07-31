@@ -8,7 +8,7 @@ The application allows users to enter housing information and receive an AI-gene
 
 https://ai-house-prices.onrender.com/
 
-[View Full Machine Learning Documentation](#machine-learning)
+[View Full Machine Learning Documentation](#ml-explained)
 
 ## Features
 
@@ -84,7 +84,7 @@ AI-Housing-Predictor/
 - Pandas
 - Joblib
 
-## Machine Learning
+## Machine Learning 
 
 - Scikit-Learn
 - Matplotlib
@@ -94,6 +94,7 @@ AI-Housing-Predictor/
 - Lasso Regression
 - Random Forest
 - Gradient Boosting
+- XGBRegressor
 
 ## Frontend
 
@@ -128,7 +129,7 @@ To demonstrate a complete machine learning workflow:
 
 **Data → Training → Evaluation → Deployment → User Interaction**
 
-# Machine Learning
+# ML explained
 
 ## Dataset
 
