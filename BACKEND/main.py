@@ -3,10 +3,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.linear_model import Lasso, Ridge, LinearRegression
 from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
+from sklearn.model_selection import train_test_split, cross_val_score, RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, PowerTransformer, QuantileTransformer, RobustScaler
+from xgboost import XGBRegressor
 df = pd.read_csv("BACKEND/boston.csv")
 
 #print(df.isnull().sum())
@@ -33,7 +34,7 @@ Y = df["MEDV"]
 
 """SPLITS"""
 xTrain, xTest, yTrain, yTest = train_test_split(
-    X, Y, test_size=.3, random_state=11
+    X, Y, test_size=.2, random_state=11
 )
 
 """Replaced with Cross Validation"""
@@ -92,28 +93,36 @@ for name, scaler in scales.items():
         #     best_model = pipeline
 
 trees = {
-    "Forest": RandomForestRegressor(
-        random_state=11,
-    ),
-    "Gradient": GradientBoostingRegressor(
-        random_state=11,
-    )
+    "Forest": RandomForestRegressor(),
+    "Gradient": GradientBoostingRegressor(),
+    "XGBRegressor": XGBRegressor()
 }
 for model_name, model in trees.items():
     if model_name=="Forest":
         parameters={
             "n_estimators": [1,25,50,75,100,125, 150, 175, 200],#range(1, 101),
-            "max_depth": [1,3,5,7,9,11]
+            "max_depth": [1,3,5,7,9,11],
+            "random_state": [11]
+        }
+    elif model_name=="Gradient":
+        parameters={
+            "n_estimators": [1,25,50,75,100,125, 150, 175, 200],#range(1, 101),
+            "max_depth":  [1,3,5,7,9,11],
+            "learning_rate":[.1,.2,.3,.4,.5],
+            "random_state": [11]
         }
     else:
         parameters={
             "n_estimators": [1,25,50,75,100,125, 150, 175, 200],#range(1, 101),
             "max_depth":  [1,3,5,7,9,11],
-            "learning_rate":[.1,.2,.3,.4,.5]
+            "learning_rate":[.1,.2,.3,.4,.5],
+            "reg_lambda": [0, .001, 0.1, 0.5, 1, 2, 5, 10, 20, 50, 100],
+            "reg_alpha": [0, .001, 0.1, 0.5, 1, 2, 5, 10, 20, 50, 100],
+            "random_state": [11]
         }
-    crossValTrees =GridSearchCV(
+    crossValTrees =RandomizedSearchCV(
         model, 
-        param_grid=parameters, 
+        param_distributions=parameters, 
         cv=5, scoring="r2",
         n_jobs=-1,
         verbose=2
