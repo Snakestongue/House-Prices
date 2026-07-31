@@ -8,6 +8,8 @@ The application allows users to enter housing information and receive an AI-gene
 
 https://ai-house-prices.onrender.com/
 
+[View Full Machine Learning Documentation](#machine-learning)
+
 ## Features
 
 ### Machine Learning
@@ -33,10 +35,6 @@ Automatically selects the best-performing validation model
 Retrains the final model using all the training data
 
 Saves the trained model using Joblib
-
-[View Full Machine Learning Documentation](https://github.com/Snakestongue/House-Prices/blob/Kaggle-Data/README.md)
-
-This link contains a detailed version of ML workflow and is located in the other branch.
 
 ### Web Application
 
@@ -131,7 +129,6 @@ To demonstrate a complete machine learning workflow:
 **Data → Training → Evaluation → Deployment → User Interaction**
 
 # Machine Learning
-
 
 ## Dataset
 
